@@ -1,4 +1,5 @@
 #include "add.h"
+#include "check.h"
 #include "ln.h"
 #include "rm.h"
 #include "update.h"
@@ -30,6 +31,12 @@ int main(int argc, char *argv[]) {
   if (strcmp(argv[1], "up") == 0) {
 
     int result = updateData(FILE_NAME);
+    printf("結果 : %d", result);
+  }
+
+  if (strcmp(argv[1], "ch") == 0) {
+
+    int result = changeDataState(FILE_NAME);
     printf("結果 : %d", result);
   }
 
