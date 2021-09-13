@@ -8,7 +8,11 @@
 
 char *FILE_NAME = "todo.md";
 
+int CheckDataFile(char *fileName);
+
 int main(int argc, char *argv[]) {
+
+  CheckDataFile(FILE_NAME);
 
   if (strcmp(argv[1], "add") == 0) {
 
@@ -38,6 +42,21 @@ int main(int argc, char *argv[]) {
 
     int result = changeDataState(FILE_NAME);
     printf("結果 : %d", result);
+  }
+
+  return 0;
+}
+
+//  ファイルが生成されているかチェックする
+//  絶対0が返ってくるはず
+int CheckDataFile(char *fileName) {
+  //  読みこみで開く
+  FILE *fp = fopen(fileName, "r");
+
+  //  ファイルが存在していない場合は作成する
+  if (fp == NULL) {
+    fp = fopen(fileName, "w");
+    fclose(fp);
   }
 
   return 0;
