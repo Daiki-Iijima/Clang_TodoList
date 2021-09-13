@@ -1,7 +1,8 @@
+#include "ln.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[]) {
+int showData(char *fileName) {
   //ファイル構造体へのポインタを宣言
   FILE *fp;
   char str[256][256]; //  1行の最高文字数(バイト数)
@@ -9,7 +10,7 @@ int main(int argc, char *argv[]) {
 
   //  w+ : 「書き込み」と「読み込み」モード
   //ファイル名は自分でつけたファイル名を書いてください
-  fp = fopen("todo.md", "r");
+  fp = fopen(fileName, "r");
 
   //ファイルオープンに失敗したとき
   if (fp == NULL) {

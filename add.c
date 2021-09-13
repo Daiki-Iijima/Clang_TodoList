@@ -1,18 +1,15 @@
-#include <stdio.h>  //  これは基本必要
-#include <string.h> //  strlenで使用する
+#include "add.h"
+#include <stdio.h>
+#include <string.h>
 
-char *FILE_NAME = "todo.md";
 const int BUF_SIZE = 1024;
 
-int getLastCount(char *fileName);
-
-int main(int argc, char *argv[]) {
+int add(char *fileName, const char *addStr) {
   //ファイル構造体へのポインタを宣言
   FILE *fp;
 
-  // 01.cppを読み込みモードで開く
   //ファイル名は自分でつけたファイル名を書いてください
-  fp = fopen(FILE_NAME, "a");
+  fp = fopen(fileName, "a");
 
   //ファイルオープンに失敗したとき
   if (fp == NULL) {
@@ -21,23 +18,24 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-  int count = getLastCount(FILE_NAME);
-  // printf("%d", count);
+  int count = getLineCount(fileName);
 
   //  文字列としてファイルポインタに設定されているファイルに書き込む
   //  戻り地は書き込み成功した文字数
-  int result = fprintf(fp, "%d. [ ] %s\n", count + 1, argv[1]);
-
-  if (result == strlen(argv[1])) {
-    printf("登録失敗");
-  }
-
+  unsigned int result = fprintf(fp, "%d. [ ] %s\n", count + 1, addStr);
   //  ファイルを閉じる
   fclose(fp);
+
+  if (result == -1) {
+    return 1;
+  }
+
   return 0;
+  ;
 }
 
-int getLastCount(char *fileName) {
+//  行数を取得する
+int getLineCount(char *fileName) {
   FILE *fp;
   char buf[BUF_SIZE];
   int line = 0;

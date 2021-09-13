@@ -1,7 +1,8 @@
+#include "update.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[]) {
+int updateData(char *fileName) {
   //ファイル構造体へのポインタを宣言
   FILE *fp;
   char str[256][256]; //  1行の最高文字数(バイト数)
@@ -9,7 +10,7 @@ int main(int argc, char *argv[]) {
 
   //  w+ : 「書き込み」と「読み込み」モード
   //ファイル名は自分でつけたファイル名を書いてください
-  fp = fopen("todo.md", "r");
+  fp = fopen(fileName, "r");
 
   //ファイルオープンに失敗したとき
   if (fp == NULL) {
@@ -30,6 +31,7 @@ int main(int argc, char *argv[]) {
 
   //  消去する番号を要求
   char s[256];
+  printf("更新したい項目番号を入力してください:");
   //  改行文字が最後に含まれる
   fgets(s, 256, stdin);
 
@@ -69,7 +71,7 @@ int main(int argc, char *argv[]) {
 
   //  書き込み
   FILE *wFp;
-  wFp = fopen("todo.md", "w");
+  wFp = fopen(fileName, "w");
 
   //ファイルオープンに失敗したとき
   if (wFp == NULL) {
