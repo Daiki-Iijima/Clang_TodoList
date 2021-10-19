@@ -1,0 +1,1 @@
+int changeDataState(char *fileName);
