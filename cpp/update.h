@@ -1,1 +1,0 @@
-int updateData(char *fileName);
